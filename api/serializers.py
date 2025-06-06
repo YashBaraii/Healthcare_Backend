@@ -1,6 +1,5 @@
-# api/serializers.py
 from rest_framework import serializers
-from .models import User, Patient, Doctor
+from .models import User, Patient, Doctor, PatientDoctorMapping
 from django.contrib.auth.password_validation import validate_password
 
 
@@ -34,3 +33,12 @@ class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
         fields = "__all__"
+
+
+class PatientDoctorMappingSerializer(serializers.ModelSerializer):
+    patient_name = serializers.CharField(source="patient.name", read_only=True)
+    doctor_name = serializers.CharField(source="doctor.name", read_only=True)
+
+    class Meta:
+        model = PatientDoctorMapping
+        fields = ["id", "patient", "patient_name", "doctor", "doctor_name"]

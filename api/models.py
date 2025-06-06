@@ -6,9 +6,8 @@ from django.conf import settings
 class User(AbstractUser):
     email = models.EmailField(unique=True)
 
-    # Use email as the primary identifier for login
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]  # Optional fields if needed
+    REQUIRED_FIELDS = ["username"]
 
     # Fix reverse accessor clashes
     groups = models.ManyToManyField(
@@ -56,3 +55,18 @@ class Doctor(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PatientDoctorMapping(models.Model):
+    patient = models.ForeignKey(
+        Patient, on_delete=models.CASCADE, related_name="doctor_mappings"
+    )
+    doctor = models.ForeignKey(
+        Doctor, on_delete=models.CASCADE, related_name="patient_mappings"
+    )
+
+    class Meta:
+        unique_together = ("patient", "doctor")
+
+    def __str__(self):
+        return f"{self.patient.name} ↔ {self.doctor.name}"
