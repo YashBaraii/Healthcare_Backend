@@ -1,0 +1,228 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Healthcare Backend API - Django DRF</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.ico' %}"
+      type="image/x-icon"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(to right, #f8f9fa, #eef1f6);
+        margin: 0;
+        padding: 0;
+        color: #2b2b2b;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+      }
+      header {
+        text-align: center;
+        padding-bottom: 30px;
+      }
+      header h1 {
+        font-size: 2.5em;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+      header p {
+        font-size: 1.1em;
+        color: #555;
+      }
+      .section {
+        background: #fff;
+        padding: 25px 30px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+      }
+      .section:hover {
+        transform: translateY(-2px);
+      }
+      .section h2 {
+        color: #007bff;
+        margin-top: 0;
+        margin-bottom: 15px;
+      }
+      ul {
+        padding-left: 20px;
+        margin-top: 0;
+      }
+      ul li {
+        margin-bottom: 8px;
+      }
+      code {
+        background: #e9ecef;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 0.95em;
+      }
+      a {
+        color: #0056b3;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      footer {
+        text-align: center;
+        padding-top: 30px;
+        color: #888;
+        font-size: 0.95em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🩺 Healthcare Backend API</h1>
+        <p>
+          <strong
+            >Built with Django, DRF, PostgreSQL, and JWT Authentication</strong
+          >
+        </p>
+      </header>
+
+      <div class="section">
+        <h2>🎯 Objective</h2>
+        <p>
+          Build a secure backend for managing users, patients, doctors, and
+          assignments using RESTful APIs, JWT auth, and PostgreSQL.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>🧰 Technologies Used</h2>
+        <ul>
+          <li>Django & Django REST Framework</li>
+          <li>PostgreSQL</li>
+          <li>JWT Authentication (SimpleJWT)</li>
+          <li>Python Decouple for environment configs</li>
+          <li>CORS Headers</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>🔐 Authentication APIs</h2>
+        <ul>
+          <li><code>POST /api/auth/register/</code> – Register a new user</li>
+          <li>
+            <code>POST /api/auth/login/</code> – Login and receive JWT tokens
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>👤 Patient APIs</h2>
+        <ul>
+          <li><code>POST /api/patients/</code> – Create patient</li>
+          <li><code>GET /api/patients/</code> – List user’s patients</li>
+          <li><code>GET /api/patients/&lt;id&gt;/</code> – View patient</li>
+          <li><code>PUT /api/patients/&lt;id&gt;/</code> – Update patient</li>
+          <li>
+            <code>DELETE /api/patients/&lt;id&gt;/</code> – Delete patient
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>👨‍⚕️ Doctor APIs</h2>
+        <ul>
+          <li><code>POST /api/doctors/</code> – Create doctor</li>
+          <li><code>GET /api/doctors/</code> – List all doctors</li>
+          <li><code>GET /api/doctors/&lt;id&gt;/</code> – View doctor</li>
+          <li><code>PUT /api/doctors/&lt;id&gt;/</code> – Update doctor</li>
+          <li><code>DELETE /api/doctors/&lt;id&gt;/</code> – Delete doctor</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>🔗 Patient-Doctor Mapping APIs</h2>
+        <ul>
+          <li><code>POST /api/mappings/</code> – Assign doctor to patient</li>
+          <li><code>GET /api/mappings/</code> – View all mappings</li>
+          <li>
+            <code>GET /api/mappings/&lt;patient_id&gt;/</code> – View assigned
+            doctors
+          </li>
+          <li>
+            <code>DELETE /api/mappings/delete/&lt;id&gt;/</code> – Remove
+            mapping
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>🔒 Security & Validation</h2>
+        <ul>
+          <li>Only patient creators can edit/delete their records</li>
+          <li>
+            Validations for mapping (duplicate prevention, existence check)
+          </li>
+          <li>All secrets in <code>.env</code></li>
+          <li>Global error handling with friendly messages</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>🧪 Testing & Features</h2>
+        <ul>
+          <li>All APIs tested in Postman with JWT</li>
+          <li>CORS enabled for future frontend integration</li>
+          <li>Pagination enabled for large data sets</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>🚀 Deployment Ready</h2>
+        <ul>
+          <li>Environment-ready via Python-Decouple</li>
+          <li>Database: PostgreSQL</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>📦 Additional Information</h2>
+        <p>
+          View full source on GitHub:<br />
+          <a
+            href="https://github.com/YashBaraii/Healthcare_Backend"
+            target="_blank"
+          >
+            github.com/YashBaraii/Healthcare_Backend
+          </a>
+        </p>
+        <p>
+          Checkout the Google Drive: <br />
+          <a
+            href="https://drive.google.com/drive/folders/13T05wp_NyM5EJV_Xc7md1VgRfAoImFQ2?usp=sharing"
+            target="_blank"
+          >
+            https://drive.google.com/drive/folders/13T05wp_NyM5EJV_Xc7md1VgRfAoImFQ2?usp=sharing
+          </a>
+        </p>
+      </div>
+
+      <footer>
+        <hr />
+        <p>
+          © 2025 Healthcare API by Yash Barai – Powered by Django REST Framework
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
