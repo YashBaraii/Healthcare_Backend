@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User, Patient, Doctor, PatientDoctorMapping
 from django.contrib.auth.password_validation import validate_password
+from rest_framework.exceptions import ValidationError
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -42,3 +43,15 @@ class PatientDoctorMappingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientDoctorMapping
         fields = ["id", "patient", "patient_name", "doctor", "doctor_name"]
+
+    def validate(self, data):
+        patient = data.get("patient")
+        doctor = data.get("doctor")
+
+        if not Patient.objects.filter(id=patient.id).exists():
+            raise ValidationError({"patient": "Patient does not exist."})
+        if not Doctor.objects.filter(id=doctor.id).exists():
+            raise ValidationError({"doctor": "Doctor does not exist."})
+        if PatientDoctorMapping.objects.filter(patient=patient, doctor=doctor).exists():
+            raise ValidationError("This doctor is already assigned to this patient.")
+        return data

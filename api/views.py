@@ -10,6 +10,7 @@ from .serializers import (
     PatientDoctorMappingSerializer,
 )
 from rest_framework import generics, permissions
+from .permissions import IsOwner
 
 
 class RegisterView(APIView):
@@ -74,3 +75,11 @@ class MappingDeleteView(generics.DestroyAPIView):
     queryset = PatientDoctorMapping.objects.all()
     serializer_class = PatientDoctorMappingSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class PatientDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = PatientSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    def get_queryset(self):
+        return Patient.objects.filter(created_by=self.request.user)
