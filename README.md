@@ -10,7 +10,9 @@ A secure and scalable healthcare backend system built with Django REST Framework
 
 - 📬 **Testing Guide**: [test_guide.html](https://healthcare-backend-alde.onrender.com/api/test-guide)
   
-- 📬 **Postman Testing Workspace**: [Workspace Link](https://test55-1090.postman.co/workspace/01073e56-881d-4491-9c20-90ff14fb1452)
+- 📬 **Postman Testing Workspace**: <br>
+          - [Workspace Link with local url](https://www.postman.com/test55-1090/workspace/healthcare-backend-local-url)  <br>
+          - [Workspace Link with deployed url](https://www.postman.com/test55-1090/workspace/healthcare-backend-deployed-url)
 
 - 📷 **Watch The Demo**: [YouTube video link](https://youtube.com)
 
