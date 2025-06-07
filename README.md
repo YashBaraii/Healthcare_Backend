@@ -77,15 +77,6 @@ A secure and scalable healthcare backend system built with Django REST Framework
 
 ---
 
-## 🧪 Testing
-
-- 🧠 Test JWT-protected APIs using **Postman** or **Thunder Client**
-- Include `Authorization: Bearer <access_token>` header
-- Use [`test_guide.html`](api/test_guide.html) to copy test payloads
-- You can also test in browser with session login (`SessionAuthentication` – dev only)
-
----
-
 ## 📦 Models & Fields
 
 ### 🔐 1. `User` Model (Custom)
@@ -220,6 +211,15 @@ python .\manage.py runserver
 ```
 
 Visit: http://127.0.0.1:8000
+
+---
+
+## 🧪 Testing
+
+- 🧠 Test JWT-protected APIs using **Postman** or **Thunder Client**
+- Include `Authorization: Bearer <access_token>` header
+- Use [`test_guide.html`](api/test_guide.html) to copy test payloads
+- You can also test in browser with session login (`SessionAuthentication` – dev only)
 
 ---
 
