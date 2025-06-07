@@ -14,7 +14,7 @@ A secure and scalable healthcare backend system built with Django REST Framework
           - [Workspace Link with local url](https://www.postman.com/test55-1090/workspace/healthcare-backend-local-url)  <br>
           - [Workspace Link with deployed url](https://www.postman.com/test55-1090/workspace/healthcare-backend-deployed-url)
 
-- 📷 **Watch The Demo**: [YouTube video link](https://youtube.com)
+- 📷 **Watch The Demo**: [YouTube video link](https://youtu.be/w_KbNu_XBqs)
 
 ---
 
