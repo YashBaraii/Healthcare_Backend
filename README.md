@@ -35,7 +35,7 @@ A secure and scalable healthcare backend system built with Django REST Framework
 | -------------- | ----------------------------------- |
 | Backend        | Django, Django REST Framework       |
 | Authentication | JWT (djangorestframework-simplejwt) |
-| Database       | PostgreSQL                          |
+| Database       | PostgreSQL by Render                |
 | Hosting        | Render                              |
 | Docs UI        | HTML + JavaScript                   |
 | Dev Tools      | Postman, VSCode, Git                |
