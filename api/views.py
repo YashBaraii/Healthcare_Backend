@@ -11,6 +11,7 @@ from .serializers import (
 )
 from rest_framework import generics, permissions
 from .permissions import IsOwner
+from django.shortcuts import render
 
 
 class RegisterView(APIView):
@@ -83,3 +84,7 @@ class PatientDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Patient.objects.filter(created_by=self.request.user)
+
+
+def TestGuideView(request):
+    return render(request, "api/test_guide.html")

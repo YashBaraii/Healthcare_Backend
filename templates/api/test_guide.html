@@ -1,0 +1,270 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>API Testing Guide – Healthcare API</title>
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f4f6f8;
+        padding: 30px;
+        max-width: 960px;
+        margin: auto;
+        color: #333;
+      }
+
+      h1,
+      h2 {
+        color: #007bff;
+      }
+
+      .endpoint {
+        margin-bottom: 40px;
+      }
+
+      .method {
+        font-weight: bold;
+        color: #fff;
+        background: #007bff;
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+      }
+
+      .copy-btn {
+        background: #28a745;
+        color: #fff;
+        border: none;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        border-radius: 4px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
+      pre {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>🧪 API Testing Guide</h1>
+    <p>
+      Use these examples to test your Django DRF backend with JWT
+      authentication.
+    </p>
+
+    <hr style="border: 1px solid #000000; margin: 20px 0" />
+
+    <!-- AUTH -->
+    <h2>🔐 Auth</h2>
+
+    <div class="endpoint">
+      <span class="method">POST</span>
+      <a href="/api/auth/register/" target="_blank">/api/auth/register/</a>
+      <button class="copy-btn" onclick="copyToClipboard('reg')">
+        Copy JSON
+      </button>
+      <pre id="reg">
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "TestPass123",
+  "password2": "TestPass123"
+}</pre
+      >
+    </div>
+
+    <div class="endpoint">
+      <span class="method">POST</span>
+      <a href="/api/auth/login/" target="_blank">/api/auth/login/</a>
+
+      <button class="copy-btn" onclick="copyToClipboard('login')">
+        Copy JSON
+      </button>
+      <pre id="login">
+{
+  "email": "test@example.com",
+  "password": "TestPass123"
+}</pre
+      >
+    </div>
+
+    <hr style="border: 1px solid #000000; margin: 20px 0" />
+
+    <!-- PATIENT -->
+    <h2>👤 Patient</h2>
+
+    <div class="endpoint">
+      <span class="method">POST</span>
+      <a href="/api/patients/" target="_blank">/api/patients/</a>
+      <button class="copy-btn" onclick="copyToClipboard('addPatient')">
+        Copy JSON
+      </button>
+      <pre id="addPatient">
+{
+  "name": "Jane Doe",
+  "age": 32,
+  "gender": "F",
+  "address": "456 Elm Street"
+}</pre
+      >
+    </div>
+
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <a href="/api/patients/" target="_blank">/api/patients/</a>
+      <p>No body required</p>
+    </div>
+
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <a href=" /api/patients/1/" target="_blank"> /api/patients/1/</a>
+      <p>Replace <code>1</code> with Patient ID</p>
+    </div>
+
+    <div class="endpoint">
+      <span class="method">PUT</span>
+      <a href=" /api/patients/1/" target="_blank"> /api/patients/1/</a>
+      <button class="copy-btn" onclick="copyToClipboard('updatePatient')">
+        Copy JSON
+      </button>
+      <pre id="updatePatient">
+        {
+          "name": "Jane D.",
+          "age": 33,
+          "gender": "F",
+          "address": "789 Pine Lane"
+        }</pre
+      >
+    </div>
+
+    <div class="endpoint">
+      <span class="method">DELETE</span>
+      <a href=" /api/patients/1/" target="_blank"> /api/patients/1/</a>
+      <p>Replace <code>1</code> with Patient ID</p>
+    </div>
+
+    <hr style="border: 1px solid #000000; margin: 20px 0" />
+
+    <!-- DOCTOR -->
+    <h2>👨‍⚕️ Doctor</h2>
+
+    <div class="endpoint">
+      <span class="method">POST</span>
+      <a href="/api/doctors/" target="_blank">/api/doctors/</a>
+      <button class="copy-btn" onclick="copyToClipboard('addDoctor')">
+        Copy JSON
+      </button>
+      <pre id="addDoctor">
+{
+  "name": "Dr. Alice Smith",
+  "specialization": "Pediatrics",
+  "experience": 7,
+  "contact": "alice.smith@hospital.com"
+}</pre
+      >
+    </div>
+
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <a href="/api/doctors/" target="_blank">/api/doctors/</a>
+      <p>No body required</p>
+    </div>
+
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <a href="/api/doctors/1/" target="_blank">/api/doctors/1/</a>
+      <p>Replace <code>1</code> with Doctor ID</p>
+    </div>
+
+    <div class="endpoint">
+      <span class="method">PUT</span>
+      <a href="/api/doctors/1/" target="_blank">/api/doctors/1/</a>
+      <button class="copy-btn" onclick="copyToClipboard('updateDoctor')">
+        Copy JSON
+      </button>
+      <pre id="updateDoctor">
+{
+  "name": "Dr. Alice B. Smith",
+  "specialization": "General Pediatrics",
+  "experience": 8,
+  "contact": "aliceb.smith@clinic.com"
+}</pre
+      >
+    </div>
+
+    <div class="endpoint">
+      <span class="method">DELETE</span>
+      <a href="/api/doctors/1/" target="_blank">/api/doctors/1/</a>
+      <p>Replace <code>1</code> with Doctor ID</p>
+    </div>
+
+    <hr style="border: 1px solid #000000; margin: 20px 0" />
+
+    <!-- MAPPINGS -->
+    <h2>🔗 Mappings</h2>
+
+    <div class="endpoint">
+      <span class="method">POST</span>
+      <a href="/api/mappings/" target="_blank">/api/mappings/</a>
+      <button class="copy-btn" onclick="copyToClipboard('assignMapping')">
+        Copy JSON
+      </button>
+      <pre id="assignMapping">
+{
+  "patient": 2,
+  "doctor": 1
+}</pre
+      >
+    </div>
+
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <a href="/api/mappings/" target="_blank">/api/mappings/</a>
+      <p>No body required</p>
+    </div>
+
+    <div class="endpoint">
+      <span class="method">GET</span>
+      <a href="/api/mappings/2/" target="_blank">/api/mappings/2/</a>
+      <p>Replace <code>2</code> with Patient ID</p>
+    </div>
+
+    <div class="endpoint">
+      <span class="method">DELETE</span>
+      <a href="/api/mappings/delete/3/" target="_blank"
+        >/api/mappings/delete/3/</a
+      >
+      <p>Replace <code>3</code> with Mapping ID</p>
+    </div>
+
+    <script>
+      function copyToClipboard(id) {
+        const el = document.getElementById(id);
+        navigator.clipboard
+          .writeText(el.textContent)
+          .then(() => {
+            alert("Copied to clipboard!");
+          })
+          .catch((err) => {
+            alert("Failed to copy.");
+          });
+      }
+    </script>
+  </body>
+</html>

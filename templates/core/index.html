@@ -2,227 +2,347 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Healthcare Backend API - Django DRF</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="icon"
-      href="{% static 'images/favicon.ico' %}"
-      type="image/x-icon"
-    />
 
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background: linear-gradient(to right, #f8f9fa, #eef1f6);
-        margin: 0;
-        padding: 0;
-        color: #2b2b2b;
-      }
-      .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 40px 20px;
-      }
-      header {
-        text-align: center;
-        padding-bottom: 30px;
-      }
-      header h1 {
-        font-size: 2.5em;
-        color: #007bff;
-        margin-bottom: 10px;
-      }
-      header p {
-        font-size: 1.1em;
-        color: #555;
-      }
-      .section {
-        background: #fff;
-        padding: 25px 30px;
-        margin-bottom: 25px;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease;
-      }
-      .section:hover {
-        transform: translateY(-2px);
-      }
-      .section h2 {
-        color: #007bff;
-        margin-top: 0;
-        margin-bottom: 15px;
-      }
-      ul {
-        padding-left: 20px;
-        margin-top: 0;
-      }
-      ul li {
-        margin-bottom: 8px;
-      }
-      code {
-        background: #e9ecef;
-        padding: 3px 6px;
-        border-radius: 4px;
-        font-family: "Courier New", monospace;
-        font-size: 0.95em;
-      }
-      a {
-        color: #0056b3;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      footer {
-        text-align: center;
-        padding-top: 30px;
-        color: #888;
-        font-size: 0.95em;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>🩺 Healthcare Backend API</h1>
-        <p>
-          <strong
-            >Built with Django, DRF, PostgreSQL, and JWT Authentication</strong
-          >
-        </p>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <title>Healthcare Backend API - Django DRF</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
 
-      <div class="section">
-        <h2>🎯 Objective</h2>
-        <p>
-          Build a secure backend for managing users, patients, doctors, and
-          assignments using RESTful APIs, JWT auth, and PostgreSQL.
-        </p>
-      </div>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #eef1f6);
+      margin: 0;
+      padding: 0;
+      color: #2b2b2b;
+    }
 
-      <div class="section">
-        <h2>🧰 Technologies Used</h2>
-        <ul>
-          <li>Django & Django REST Framework</li>
-          <li>PostgreSQL</li>
-          <li>JWT Authentication (SimpleJWT)</li>
-          <li>Python Decouple for environment configs</li>
-          <li>CORS Headers</li>
-        </ul>
-      </div>
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
 
-      <div class="section">
-        <h2>🔐 Authentication APIs</h2>
-        <ul>
-          <li><code>POST /api/auth/register/</code> – Register a new user</li>
-          <li>
-            <code>POST /api/auth/login/</code> – Login and receive JWT tokens
-          </li>
-        </ul>
-      </div>
+    header {
+      text-align: center;
+      padding-bottom: 30px;
+    }
 
-      <div class="section">
-        <h2>👤 Patient APIs</h2>
-        <ul>
-          <li><code>POST /api/patients/</code> – Create patient</li>
-          <li><code>GET /api/patients/</code> – List user’s patients</li>
-          <li><code>GET /api/patients/&lt;id&gt;/</code> – View patient</li>
-          <li><code>PUT /api/patients/&lt;id&gt;/</code> – Update patient</li>
-          <li>
-            <code>DELETE /api/patients/&lt;id&gt;/</code> – Delete patient
-          </li>
-        </ul>
-      </div>
+    header h1 {
+      font-size: 2.5em;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
 
-      <div class="section">
-        <h2>👨‍⚕️ Doctor APIs</h2>
-        <ul>
-          <li><code>POST /api/doctors/</code> – Create doctor</li>
-          <li><code>GET /api/doctors/</code> – List all doctors</li>
-          <li><code>GET /api/doctors/&lt;id&gt;/</code> – View doctor</li>
-          <li><code>PUT /api/doctors/&lt;id&gt;/</code> – Update doctor</li>
-          <li><code>DELETE /api/doctors/&lt;id&gt;/</code> – Delete doctor</li>
-        </ul>
-      </div>
+    header p {
+      font-size: 1.1em;
+      color: #555;
+    }
 
-      <div class="section">
-        <h2>🔗 Patient-Doctor Mapping APIs</h2>
-        <ul>
-          <li><code>POST /api/mappings/</code> – Assign doctor to patient</li>
-          <li><code>GET /api/mappings/</code> – View all mappings</li>
-          <li>
-            <code>GET /api/mappings/&lt;patient_id&gt;/</code> – View assigned
-            doctors
-          </li>
-          <li>
-            <code>DELETE /api/mappings/delete/&lt;id&gt;/</code> – Remove
-            mapping
-          </li>
-        </ul>
-      </div>
+    .section {
+      background: #fff;
+      padding: 25px 30px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
 
-      <div class="section">
-        <h2>🔒 Security & Validation</h2>
-        <ul>
-          <li>Only patient creators can edit/delete their records</li>
-          <li>
-            Validations for mapping (duplicate prevention, existence check)
-          </li>
-          <li>All secrets in <code>.env</code></li>
-          <li>Global error handling with friendly messages</li>
-        </ul>
-      </div>
+    .section:hover {
+      transform: translateY(-2px);
+    }
 
-      <div class="section">
-        <h2>🧪 Testing & Features</h2>
-        <ul>
-          <li>All APIs tested in Postman with JWT</li>
-          <li>CORS enabled for future frontend integration</li>
-          <li>Pagination enabled for large data sets</li>
-        </ul>
-      </div>
+    .section h2 {
+      color: #007bff;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
 
-      <div class="section">
-        <h2>🚀 Deployment Ready</h2>
-        <ul>
-          <li>Environment-ready via Python-Decouple</li>
-          <li>Database: PostgreSQL</li>
-        </ul>
-      </div>
+    ul {
+      padding-left: 20px;
+      margin-top: 0;
+    }
 
-      <div class="section">
-        <h2>📦 Additional Information</h2>
-        <p>
-          View full source on GitHub:<br />
-          <a
-            href="https://github.com/YashBaraii/Healthcare_Backend"
-            target="_blank"
-          >
-            github.com/YashBaraii/Healthcare_Backend
-          </a>
-        </p>
-        <p>
-          Checkout the Google Drive: <br />
-          <a
-            href="https://drive.google.com/drive/folders/13T05wp_NyM5EJV_Xc7md1VgRfAoImFQ2?usp=sharing"
-            target="_blank"
-          >
-            https://drive.google.com/drive/folders/13T05wp_NyM5EJV_Xc7md1VgRfAoImFQ2?usp=sharing
-          </a>
-        </p>
-      </div>
+    ul li {
+      margin-bottom: 8px;
+    }
 
-      <footer>
-        <hr />
-        <p>
-          © 2025 Healthcare API by Yash Barai – Powered by Django REST Framework
-        </p>
-      </footer>
+    code {
+      background: #e9ecef;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 30px;
+      color: #888;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>🩺 Healthcare Backend API</h1>
+      <p>
+        <strong>Built with Django, DRF, PostgreSQL, and JWT Authentication</strong>
+      </p>
+    </header>
+
+    <div class="section">
+      <h2>🎯 Objective</h2>
+      <p>
+        Build a secure backend for managing users, patients, doctors, and
+        assignments using RESTful APIs, JWT auth, and PostgreSQL.
+      </p>
     </div>
-  </body>
+
+
+
+    <div class="section">
+      <h2>🧰 Technologies Used</h2>
+      <ul>
+        <li>Django & Django REST Framework</li>
+        <li>PostgreSQL</li>
+        <li>JWT Authentication (SimpleJWT)</li>
+        <li>Python Decouple for environment configs</li>
+        <li>CORS Headers</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🧪 API Testing Guide</h2>
+      <p>
+        Need help testing endpoints with the correct input format?<br>
+        Visit:
+        <a href="/api/test-guide/" target="_blank">
+          /api/test-guide/ → Backend Testing Help
+        </a>
+      </p>
+      <p>
+        This guide includes:
+      <ul>
+        <li>JSON request body formats</li>
+        <li>Required fields</li>
+        <li>Example responses</li>
+        <li>Authorization header usage</li>
+      </ul>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>🔐 Authentication APIs</h2>
+      <ul>
+        <li>
+          <a href="/api/auth/register/" target="_blank">
+            <code>POST /api/auth/register/</code>
+          </a> - Register a new user
+        </li>
+        <li>
+          <a href="/api/auth/login/" target="_blank">
+            <code>POST /api/auth/login/</code>
+          </a> - Login and receive JWT tokens
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="section">
+      <h2>👤 Patient APIs</h2>
+      <ul>
+        <li>
+          <a href="/api/patients/" target="_blank">
+            <code>POST /api/patients/</code>
+          </a> - Create patient
+        </li>
+        <li>
+          <a href="/api/patients/" target="_blank">
+            <code>GET /api/patients/</code>
+          </a> - List user's patients
+        </li>
+        <li>
+          <a href="/api/patients/1/" target="_blank">
+            <code>GET /api/patients/&lt;id&gt;/</code>
+          </a> - View patient
+        </li>
+        <li>
+          <a href="/api/patients/1/" target="_blank">
+            <code>PUT /api/patients/&lt;id&gt;/</code>
+          </a> - Update patient
+        </li>
+        <li>
+          <a href="/api/patients/1/" target="_blank">
+            <code>DELETE /api/patients/&lt;id&gt;/</code>
+          </a> - Delete patient
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="section">
+      <h2>👨‍⚕️ Doctor APIs</h2>
+      <ul>
+        <li>
+          <a href="/api/doctors/" target="_blank">
+            <code>POST /api/doctors/</code>
+          </a> - Create doctor
+        </li>
+        <li>
+          <a href="/api/doctors/" target="_blank">
+            <code>GET /api/doctors/</code>
+          </a> - List all doctors
+        </li>
+        <li>
+          <a href="/api/doctors/1/" target="_blank">
+            <code>GET /api/doctors/&lt;id&gt;/</code>
+          </a> - View doctor
+        </li>
+        <li>
+          <a href="/api/doctors/1/" target="_blank">
+            <code>PUT /api/doctors/&lt;id&gt;/</code>
+          </a> - Update doctor
+        </li>
+        <li>
+          <a href="/api/doctors/1/" target="_blank">
+            <code>DELETE /api/doctors/&lt;id&gt;/</code>
+          </a> - Delete doctor
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="section">
+      <h2>🔗 Patient-Doctor Mapping APIs</h2>
+      <ul>
+        <li>
+          <a href="/api/mappings/" target="_blank">
+            <code>POST /api/mappings/</code>
+          </a> - Assign doctor to patient
+        </li>
+        <li>
+          <a href="/api/mappings/" target="_blank">
+            <code>GET /api/mappings/</code>
+          </a> - View all mappings
+        </li>
+        <li>
+          <a href="/api/mappings/2/" target="_blank">
+            <code>GET /api/mappings/&lt;patient_id&gt;/</code>
+          </a> - View assigned doctors
+        </li>
+        <li>
+          <a href="/api/mappings/delete/3/" target="_blank">
+            <code>DELETE /api/mappings/delete/&lt;id&gt;/</code>
+          </a> - Remove mapping
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="section">
+      <h2>📦 Data Models</h2>
+
+      <h3>🔐 User</h3>
+      <ul>
+        <li>
+          <code>email</code> – Primary unique identifier (used for login)
+        </li>
+        <li><code>username</code> – Required by Django</li>
+        <li><code>password</code> – Encrypted password</li>
+      </ul>
+
+      <h3>👤 Patient</h3>
+      <ul>
+        <li><code>name</code> – Full name (string)</li>
+        <li><code>age</code> – Age (integer)</li>
+        <li><code>gender</code> – 'M', 'F', or 'O'</li>
+        <li><code>address</code> – Text address</li>
+        <li><code>created_by</code> – ForeignKey to <code>User</code></li>
+      </ul>
+
+      <h3>👨‍⚕️ Doctor</h3>
+      <ul>
+        <li><code>name</code> – Full name</li>
+        <li><code>specialization</code> – Field of medicine</li>
+        <li><code>experience</code> – Years of experience (integer)</li>
+        <li><code>contact</code> – Contact email or number</li>
+      </ul>
+
+      <h3>🔗 PatientDoctorMapping</h3>
+      <ul>
+        <li><code>patient</code> – ForeignKey to <code>Patient</code></li>
+        <li><code>doctor</code> – ForeignKey to <code>Doctor</code></li>
+        <li>
+          🔁 Each mapping is <strong>unique</strong> per patient-doctor pair
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🔒 Security & Validation</h2>
+      <ul>
+        <li>Only patient creators can edit/delete their records</li>
+        <li>
+          Validations for mapping (duplicate prevention, existence check)
+        </li>
+        <li>All secrets in <code>.env</code></li>
+        <li>Global error handling with friendly messages</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🧪 Testing & Features</h2>
+      <ul>
+        <li>All APIs tested in Postman with JWT</li>
+        <li>CORS enabled for future frontend integration</li>
+        <li>Pagination enabled for large data sets</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🚀 Deployment Ready</h2>
+      <ul>
+        <li>Environment-ready via Python-Decouple</li>
+        <li>Database: PostgreSQL</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📦 Additional Information</h2>
+      <p>
+        View full source on GitHub:<br />
+        <a href="https://github.com/YashBaraii/Healthcare_Backend" target="_blank">
+          github.com/YashBaraii/Healthcare_Backend
+        </a>
+      </p>
+      <p>
+        Checkout the Google Drive: <br />
+        <a href="https://drive.google.com/drive/folders/13T05wp_NyM5EJV_Xc7md1VgRfAoImFQ2?usp=sharing" target="_blank">
+          https://drive.google.com/drive/folders/13T05wp_NyM5EJV_Xc7md1VgRfAoImFQ2?usp=sharing
+        </a>
+      </p>
+    </div>
+
+    <footer>
+      <hr />
+      <p>
+        © 2025 Healthcare API by Yash Barai – Powered by Django REST Framework
+      </p>
+    </footer>
+  </div>
+</body>
+
 </html>

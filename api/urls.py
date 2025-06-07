@@ -9,6 +9,7 @@ from .views import (
     MappingListCreateView,
     PatientMappingsView,
     MappingDeleteView,
+    TestGuideView,
 )
 
 urlpatterns = [
@@ -28,4 +29,5 @@ urlpatterns = [
     path(
         "mappings/delete/<int:pk>/", MappingDeleteView.as_view(), name="mapping-delete"
     ),
+    path("test-guide/", TestGuideView, name="test-guide"),
 ]
