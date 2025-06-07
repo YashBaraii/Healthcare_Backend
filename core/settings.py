@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 from datetime import timedelta
 import dj_database_url
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,7 +35,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["healthcare-backend-alde.onrender.com", "localhost"]
 
 
 SIMPLE_JWT = {
@@ -91,13 +93,13 @@ MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  # Development only
+# CORS_ALLOW_ALL_ORIGINS = True  # Development only
 
 # For production:
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:8000",
-#     "https://yourfrontend.com"
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "https://healthcare-backend-alde.onrender.com",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -183,7 +185,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "static"]  # This is fine
+STATIC_ROOT = BASE_DIR / "staticfiles"  # 🔥 This is required for collectstatic
 
 # If serving in production:
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
