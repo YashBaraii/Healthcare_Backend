@@ -223,7 +223,7 @@ Visit: http://127.0.0.1:8000
 ## 🧪 Testing
 
 - 🧠 Test JWT-protected APIs using **Postman** or **Thunder Client**
-- Postman testing workspace link: [Workspace](https://test55-1090.postman.co/workspace/01073e56-881d-4491-9c20-90ff14fb1452). For testing APIs locally.
+- Postman testing workspace link: [Workspace](https://www.postman.com/test55-1090/workspace/healthcare-backend-local-url). For testing APIs locally.
 - Include `Authorization: Bearer <access_token>` header
 - Use [`test_guide.html`](https://healthcare-backend-alde.onrender.com/api/test_guide.html) to copy test payloads
 - You can also test in browser with session login (`SessionAuthentication` – dev only)
@@ -231,7 +231,7 @@ Visit: http://127.0.0.1:8000
 ---
 
 🧑‍💻 Contributors
-Yash Barai (@YashBarai)
+Yash Barai [(@YashBaraii)](https://github.com/YashBaraii)
 
 <br>
 
